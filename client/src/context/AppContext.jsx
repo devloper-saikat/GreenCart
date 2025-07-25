@@ -68,7 +68,7 @@ export const AppContextProvider = ({ children }) => {
     for (const items in cartItems) {
       let itemInfo = products.find((product) => product._id === items);
       if (cartItems[items] > 0) {
-        totalAmount += itemInfo.offerPrice * cartItems[items];
+        totalAmount += (itemInfo?.offerPrice || 0) * cartItems[items]; // ✅ Safe access
       }
     }
     return Math.floor(totalAmount * 100) / 100;
@@ -86,7 +86,6 @@ export const AppContextProvider = ({ children }) => {
     isSeller,
     setShowUserLogin,
     showUserLogin,
-    products,
     currency,
     cartItems,
     addToCart,
